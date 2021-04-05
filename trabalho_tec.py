@@ -9,25 +9,28 @@ class aresta:
         self.direcao = direcao
         self.leitura = leitura
         self.escrita = escrita   
-        
-    def printar(self):
-        print(self.direcao) 
     
 
 class estado:
     def __init__(self, nome):
         self.nome=nome 
+        self.arestas=[]
 
-    arestas = list()
-
+    
     def adicionar_aresta(self,aresta):
         self.arestas.append(aresta)
+    
+    def get_nome(self):
+        return self.nome
+    def get_arestas():
+        return arestas
 
 class mt_fita_semi_infinita:
-
     posicao_cab = 0
     fita = []
     estados = list()
+    estado_inicial=estado("0")
+    estados.append(estado_inicial)
     linhas=list()
 
     while linha:        
@@ -35,6 +38,15 @@ class mt_fita_semi_infinita:
         linhas.append(linha)
     mt_input.close()
 
+    def check_se_estado_existe_e_inclui_aresta(char_estado,aresta_c,estados_c):
+        for e in estados_c:
+                if(e.nome==char_estado):
+                    e.adicionar_aresta(aresta_c)
+                    return True
+        estado_c = estado(char_estado)
+        estado_c.arestas.append(aresta_c)
+        estados_c.append(estado_c)
+        return False
     #<current state> <current symbol> <new symbol> <direction> <new state>
     for linha in linhas:
        if linha:
@@ -45,8 +57,12 @@ class mt_fita_semi_infinita:
             char_proximo_estado = linha[8]
 
             aresta_da_interacao = aresta(char_proximo_estado,char_direcao,char_simbolo_leitura, char_simbolo_escrita)
-            
-            
-    
+            #tenho q achar o estado e tacar a aresta no doido
+            check_se_estado_existe_e_inclui_aresta(char_estado_atual,aresta_da_interacao, estados)
+
     for e in estados:
         print(e.nome)
+        print("::")
+        for a in e.arestas:
+            print(a.estado_fim)
+        print("-----------------------------")
