@@ -25,7 +25,6 @@ class estado:
         return arestas
 
 class grafo:
-
     def __init__(self):
         self.estados = list()
         self.estado_inicial=estado("0")
@@ -68,23 +67,31 @@ class grafo:
             print(e.nome)
             print("::")
             for a in e.arestas:
+                print(a.direcao)
+                print(a.leitura)
+                print(a.escrita)
                 print(a.estado_fim)
-            print("-----------------------------")
-
-class mt_semi_infinita:
-    def __init__(self):
-        self.posicao_cab = 0
-        self.fita = []
-        self.grafo_semi_inifinita = grafo()
+                print("------------")
+            print("---------------------------------------")
     
-    def get_grafo(self):
-        return self.grafo_semi_inifinita
+    def transf_semi_p_inf(self):        
+        for e in self.estados:
+            for a in e.arestas:
+                if(a.direcao=="l"):
+                    for e_e in self.estados:
+                        if(e_e.nome==a.estado_fim):
+                            e_e.arestas.append(aresta(e.nome,"d", "f", "f"))
 
 
 if linha==";S\n":
-    mt = mt_semi_infinita()
-    g=mt.get_grafo()
+    g=grafo()
     g.incluir_conteudo()
     g.fazer_grafo()
+    g.transf_semi_p_inf()
     g.printar_grafo()
+    #qualquer estado que tiver algo indo pra esquerda, adiciona uma ares
+    #estado: aresta (estado_fim, direcao, leitura, escrita)
+    #se direcao for esquerda:
+    #   estado_fim precisa adicionar uma aresta(estado_inicial, direita,branco, branco)
+
 
