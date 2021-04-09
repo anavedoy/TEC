@@ -51,7 +51,21 @@ class grafo:
         estados_c.append(estado_c)
         return False
     #<current state> <current symbol> <new symbol> <direction> <new state>
-    def fazer_grafo(self):
+    
+    def fazer_grafo_1(self):
+        for linha in self.linhas:
+            if linha and len(linha)>2:     
+                print(linha)           
+                char_estado_atual = linha[0]
+                char_simbolo_leitura = linha[2]
+                char_simbolo_escrita = linha[4]
+                char_direcao = linha[6] 
+                char_proximo_estado = linha[8]            
+
+                aresta_da_interacao = aresta(char_proximo_estado,char_direcao,char_simbolo_leitura, char_simbolo_escrita)
+                self.check_se_estado_existe_e_inclui_aresta(char_estado_atual,aresta_da_interacao, self.estados)
+    
+    def fazer_grafo_2(self):
         for linha in self.linhas:
             if linha:
                 #print(linha)
@@ -225,14 +239,14 @@ class grafo:
 if linha==";S\n":
     g=grafo()
     g.incluir_conteudo()
-    g.fazer_grafo()
+    g.fazer_grafo_1()
     lista_estados_auxiliar = g.transf_semi_p_inf()
     g.exportar_grafo(lista_estados_auxiliar)
 
 if linha==";I\n":
     g=grafo()
     g.incluir_conteudo()
-    g.fazer_grafo() 
+    g.fazer_grafo_2() 
     lista_estados_auxiliar = g.transf_inf_p_semi()
     g.exportar_grafo(lista_estados_auxiliar)
 
