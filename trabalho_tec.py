@@ -154,9 +154,7 @@ class grafo:
         return estados_semi_p_infi
 
     def transf_inf_p_semi(self):
-        estados_inf_p_semi = list()
-
-       
+        estados_inf_p_semi = list()      
 
         for e in self.estados:
             for a in e.arestas:
@@ -217,9 +215,8 @@ class grafo:
             estados_inf_p_semi.append(e)
         
         for e in estados_inf_p_semi:
-            for a in e.arestas:
-                frase = e.nome + " " + a.leitura + " " + a.escrita + " " + a.direcao + " " + a.estado_fim
-            
+            e.arestas.append(aresta(e.nome, "r", "¢", "¢"))  
+            e.arestas.append(aresta(e.nome, "r", "£", "£"))      
 
         return estados_inf_p_semi
     
